@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:suggest_doctor/screens/booking/appointments_screen_new.dart';
+import 'package:suggest_doctor/screens/ecommerce/medicines_listing_screen.dart';
 import '../../core/constants.dart';
 import '../../core/responsive.dart';
 import '../../widgets/background_image_widget.dart';
@@ -8,6 +9,7 @@ import '../booking/appointments_screen.dart';
 import '../communication/chat_screen.dart';
 import '../ecommerce/orders_deliveries_screen.dart';
 import '../profile/patient_profile_screen.dart';
+import '../../widgets/bottom_navigation_bar_widget.dart';
 
 class HomeScreenModern extends StatefulWidget {
   const HomeScreenModern({super.key});
@@ -27,9 +29,10 @@ class _HomeScreenModernState extends State<HomeScreenModern> {
         });
       },
     ),
-    const AppointmentsScreen(),
+    // const AppointmentsScreen(),
+    const AppointmentsScreenNew(),
     const ChatScreen(),
-    const OrdersDeliveriesScreen(),
+    MedicineListScreen(),
     const PatientProfileScreen(),
   ];
 
@@ -43,52 +46,9 @@ class _HomeScreenModernState extends State<HomeScreenModern> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: IndexedStack(index: _selectedIndex, children: _widgetOptions),
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              blurRadius: 10,
-              offset: const Offset(0, -5),
-            ),
-          ],
-        ),
-        child: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          currentIndex: _selectedIndex,
-          selectedItemColor: Theme.of(context).colorScheme.primary,
-          unselectedItemColor: Theme.of(context).colorScheme.secondary,
-          onTap: _onItemTapped,
-          elevation: 0,
-          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home_outlined),
-              activeIcon: Icon(Icons.home),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.calendar_today_outlined),
-              activeIcon: Icon(Icons.calendar_today),
-              label: 'Appointments',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.chat_bubble_outline),
-              activeIcon: Icon(Icons.chat_bubble),
-              label: 'Consult',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_bag_outlined),
-              activeIcon: Icon(Icons.shopping_bag),
-              label: 'Orders',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person_outline),
-              activeIcon: Icon(Icons.person),
-              label: 'Profile',
-            ),
-          ],
-        ),
+      bottomNavigationBar: BottomNavigationBarWidget(
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
       ),
     );
   }
@@ -271,7 +231,7 @@ class HomeContentModern extends StatelessWidget {
                       label: 'Medicine',
                       color: const Color(0xFF9C27B0),
                       onTap: () {
-                        Navigator.pushNamed(context, '/pharmacy_order');
+                        Navigator.pushNamed(context, '/browse_medicines');
                       },
                     ),
                   ],

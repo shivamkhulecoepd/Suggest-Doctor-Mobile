@@ -1,4 +1,4 @@
-package com.example.suggest_doctor
+package com.aptitsolutions.suggest_doctor
 
 import io.flutter.embedding.android.FlutterActivity
 

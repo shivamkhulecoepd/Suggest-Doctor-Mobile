@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:suggest_doctor/core/responsive.dart';
 import 'package:table_calendar/table_calendar.dart';
 import '../../widgets/network_image_widget.dart';
 import '../../core/constants.dart';
@@ -129,15 +130,30 @@ class _AppointmentsScreenNewState extends State<AppointmentsScreenNew>
 
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
-      appBar: CustomAppBar(
-        title: 'Appointments',
-        variant: CustomAppBarVariant.withActions,
+      appBar: AppBar(
+        // title: 'Appointments',
+        title: Text(
+          'Appointments',
+          style: TextStyle(
+            fontSize: Responsive.fontSize(context, 20),
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        automaticallyImplyLeading: false,
+        // variant: CustomAppBarVariant.withActions,
         actions: [
           IconButton(
-            icon: Icon(
-              _isCalendarView ? Icons.view_list : Icons.calendar_today,
-              color: colorScheme.onSurface,
-              size: 24,
+            icon: Container(
+              padding: EdgeInsets.all(Responsive.spacing(context, 8)),
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+                shape: BoxShape.circle,
+              ),
+              child: Icon(
+                _isCalendarView ? Icons.view_list : Icons.calendar_today,
+                color: Theme.of(context).colorScheme.primary,
+                size: Responsive.size(context, 24),
+              ),
             ),
             onPressed: () {
               setState(() {
@@ -147,10 +163,17 @@ class _AppointmentsScreenNewState extends State<AppointmentsScreenNew>
             tooltip: _isCalendarView ? 'List View' : 'Calendar View',
           ),
           IconButton(
-            icon: Icon(
-              Icons.filter_list,
-              color: colorScheme.onSurface,
-              size: 24,
+            icon: Container(
+              padding: EdgeInsets.all(Responsive.spacing(context, 8)),
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+                shape: BoxShape.circle,
+              ),
+              child: Icon(
+                Icons.filter_list,
+                color: Theme.of(context).colorScheme.primary,
+                size: Responsive.size(context, 24),
+              ),
             ),
             onPressed: _showFilterBottomSheet,
             tooltip: 'Filter',
@@ -169,10 +192,7 @@ class _AppointmentsScreenNewState extends State<AppointmentsScreenNew>
         Expanded(
           child: TabBarView(
             controller: _tabController,
-            children: [
-              _buildUpcomingAppointments(),
-              _buildPastAppointments(),
-            ],
+            children: [_buildUpcomingAppointments(), _buildPastAppointments()],
           ),
         ),
       ],
@@ -234,8 +254,10 @@ class _AppointmentsScreenNewState extends State<AppointmentsScreenNew>
                 if (upcomingCount > 0) ...[
                   SizedBox(width: 2.w),
                   Container(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 2.w, vertical: 0.5.h),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 2.w,
+                      vertical: 0.5.h,
+                    ),
                     decoration: BoxDecoration(
                       color: LightColors.warning,
                       borderRadius: BorderRadius.circular(10),
@@ -322,8 +344,12 @@ class _AppointmentsScreenNewState extends State<AppointmentsScreenNew>
     );
   }
 
-  Widget _buildEmptyState(String title, String description, String buttonText,
-      VoidCallback onPressed) {
+  Widget _buildEmptyState(
+    String title,
+    String description,
+    String buttonText,
+    VoidCallback onPressed,
+  ) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
 
@@ -424,18 +450,22 @@ class _AppointmentsScreenNewState extends State<AppointmentsScreenNew>
     // Apply consultation type filter
     if (_currentFilters['consultationType'] != 'All Types') {
       filtered = filtered
-          .where((appointment) =>
-              (appointment['consultationType'] as String?) ==
-              _currentFilters['consultationType'])
+          .where(
+            (appointment) =>
+                (appointment['consultationType'] as String?) ==
+                _currentFilters['consultationType'],
+          )
           .toList();
     }
 
     // Apply specialty filter
     if (_currentFilters['specialty'] != 'All Specialties') {
       filtered = filtered
-          .where((appointment) =>
-              (appointment['specialty'] as String?) ==
-              _currentFilters['specialty'])
+          .where(
+            (appointment) =>
+                (appointment['specialty'] as String?) ==
+                _currentFilters['specialty'],
+          )
           .toList();
     }
 
@@ -450,8 +480,9 @@ class _AppointmentsScreenNewState extends State<AppointmentsScreenNew>
           filtered = filtered.where((appointment) {
             final appointmentDate = appointment['dateTime'] as DateTime;
             return appointmentDate.isAfter(startDate!) &&
-                appointmentDate
-                    .isBefore(startDate.add(const Duration(days: 1)));
+                appointmentDate.isBefore(
+                  startDate.add(const Duration(days: 1)),
+                );
           }).toList();
           break;
         case 'This Week':
@@ -459,8 +490,9 @@ class _AppointmentsScreenNewState extends State<AppointmentsScreenNew>
           filtered = filtered.where((appointment) {
             final appointmentDate = appointment['dateTime'] as DateTime;
             return appointmentDate.isAfter(startDate!) &&
-                appointmentDate
-                    .isBefore(startDate.add(const Duration(days: 7)));
+                appointmentDate.isBefore(
+                  startDate.add(const Duration(days: 7)),
+                );
           }).toList();
           break;
         case 'This Month':
@@ -495,20 +527,26 @@ class _AppointmentsScreenNewState extends State<AppointmentsScreenNew>
     final now = DateTime.now();
     return _getFilteredAppointments()
         .where(
-            (appointment) => (appointment['dateTime'] as DateTime).isAfter(now))
+          (appointment) => (appointment['dateTime'] as DateTime).isAfter(now),
+        )
         .toList()
-      ..sort((a, b) =>
-          (a['dateTime'] as DateTime).compareTo(b['dateTime'] as DateTime));
+      ..sort(
+        (a, b) =>
+            (a['dateTime'] as DateTime).compareTo(b['dateTime'] as DateTime),
+      );
   }
 
   List<Map<String, dynamic>> _getPastAppointments() {
     final now = DateTime.now();
     return _getFilteredAppointments()
-        .where((appointment) =>
-            (appointment['dateTime'] as DateTime).isBefore(now))
+        .where(
+          (appointment) => (appointment['dateTime'] as DateTime).isBefore(now),
+        )
         .toList()
-      ..sort((a, b) =>
-          (b['dateTime'] as DateTime).compareTo(a['dateTime'] as DateTime));
+      ..sort(
+        (a, b) =>
+            (b['dateTime'] as DateTime).compareTo(a['dateTime'] as DateTime),
+      );
   }
 
   Future<void> _refreshAppointments() async {
@@ -524,7 +562,8 @@ class _AppointmentsScreenNewState extends State<AppointmentsScreenNew>
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
-            'Redirecting to reschedule appointment with ${appointment['doctorName']}'),
+          'Redirecting to reschedule appointment with ${appointment['doctorName']}',
+        ),
         backgroundColor: LightColors.warning,
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
@@ -538,7 +577,8 @@ class _AppointmentsScreenNewState extends State<AppointmentsScreenNew>
       builder: (context) => AlertDialog(
         title: Text('Cancel Appointment'),
         content: Text(
-            'Are you sure you want to cancel your appointment with ${appointment['doctorName']}?'),
+          'Are you sure you want to cancel your appointment with ${appointment['doctorName']}?',
+        ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
@@ -553,7 +593,8 @@ class _AppointmentsScreenNewState extends State<AppointmentsScreenNew>
                   backgroundColor: LightColors.error,
                   behavior: SnackBarBehavior.floating,
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8)),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
                 ),
               );
             },
@@ -583,7 +624,8 @@ class _AppointmentsScreenNewState extends State<AppointmentsScreenNew>
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
-            'Joining $consultationType consultation with ${appointment['doctorName']}'),
+          'Joining $consultationType consultation with ${appointment['doctorName']}',
+        ),
         backgroundColor: LightColors.success,
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
@@ -607,7 +649,8 @@ class _AppointmentsScreenNewState extends State<AppointmentsScreenNew>
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
-            'Booking another appointment with ${appointment['doctorName']}'),
+          'Booking another appointment with ${appointment['doctorName']}',
+        ),
         backgroundColor: LightColors.primary,
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
@@ -634,8 +677,8 @@ class _AppointmentsScreenNewState extends State<AppointmentsScreenNew>
         (appointment["consultationType"] as String?) ?? "";
     final String status = (appointment["status"] as String?) ?? "";
     final String fee = (appointment["fee"] as String?) ?? "";
-    final List<String> symptoms =
-        ((appointment["symptoms"] as List?) ?? []).cast<String>();
+    final List<String> symptoms = ((appointment["symptoms"] as List?) ?? [])
+        .cast<String>();
 
     return DraggableScrollableSheet(
       initialChildSize: 0.7,
@@ -703,14 +746,23 @@ class _AppointmentsScreenNewState extends State<AppointmentsScreenNew>
                   children: [
                     _buildDetailItem('Doctor', doctorName, theme, colorScheme),
                     _buildDetailItem(
-                        'Specialty', specialty, theme, colorScheme),
-                    _buildDetailItem('Consultation Type', consultationType,
-                        theme, colorScheme),
+                      'Specialty',
+                      specialty,
+                      theme,
+                      colorScheme,
+                    ),
                     _buildDetailItem(
-                        'Date & Time',
-                        '${_formatDate(appointmentDate)} at ${_formatTime(appointmentDate)}',
-                        theme,
-                        colorScheme),
+                      'Consultation Type',
+                      consultationType,
+                      theme,
+                      colorScheme,
+                    ),
+                    _buildDetailItem(
+                      'Date & Time',
+                      '${_formatDate(appointmentDate)} at ${_formatTime(appointmentDate)}',
+                      theme,
+                      colorScheme,
+                    ),
                     _buildDetailItem('Status', status, theme, colorScheme),
                     _buildDetailItem('Fee', fee, theme, colorScheme),
                     if (symptoms.isNotEmpty) ...[
@@ -727,27 +779,33 @@ class _AppointmentsScreenNewState extends State<AppointmentsScreenNew>
                         spacing: 2.w,
                         runSpacing: 1.h,
                         children: symptoms
-                            .map((symptom) => Container(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 3.w, vertical: 1.h),
-                                  decoration: BoxDecoration(
-                                    color: colorScheme.primary
-                                        .withValues(alpha: 0.1),
-                                    borderRadius: BorderRadius.circular(16),
-                                    border: Border.all(
-                                      color: colorScheme.primary
-                                          .withValues(alpha: 0.3),
-                                      width: 1,
-                                    ),
+                            .map(
+                              (symptom) => Container(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 3.w,
+                                  vertical: 1.h,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: colorScheme.primary.withValues(
+                                    alpha: 0.1,
                                   ),
-                                  child: Text(
-                                    symptom,
-                                    style: theme.textTheme.bodySmall?.copyWith(
-                                      color: colorScheme.primary,
-                                      fontWeight: FontWeight.w500,
+                                  borderRadius: BorderRadius.circular(16),
+                                  border: Border.all(
+                                    color: colorScheme.primary.withValues(
+                                      alpha: 0.3,
                                     ),
+                                    width: 1,
                                   ),
-                                ))
+                                ),
+                                child: Text(
+                                  symptom,
+                                  style: theme.textTheme.bodySmall?.copyWith(
+                                    color: colorScheme.primary,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ),
+                            )
                             .toList(),
                       ),
                     ],
@@ -762,7 +820,11 @@ class _AppointmentsScreenNewState extends State<AppointmentsScreenNew>
   }
 
   Widget _buildDetailItem(
-      String label, String value, ThemeData theme, ColorScheme colorScheme) {
+    String label,
+    String value,
+    ThemeData theme,
+    ColorScheme colorScheme,
+  ) {
     return Padding(
       padding: EdgeInsets.only(bottom: 2.h),
       child: Row(
@@ -795,8 +857,11 @@ class _AppointmentsScreenNewState extends State<AppointmentsScreenNew>
   String _formatDate(DateTime dateTime) {
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
-    final appointmentDate =
-        DateTime(dateTime.year, dateTime.month, dateTime.day);
+    final appointmentDate = DateTime(
+      dateTime.year,
+      dateTime.month,
+      dateTime.day,
+    );
 
     if (appointmentDate == today) {
       return "Today";
@@ -817,7 +882,7 @@ class _AppointmentsScreenNewState extends State<AppointmentsScreenNew>
         'Sep',
         'Oct',
         'Nov',
-        'Dec'
+        'Dec',
       ];
       return "${dateTime.day} ${months[dateTime.month - 1]}, ${dateTime.year}";
     }
@@ -831,7 +896,6 @@ class _AppointmentsScreenNewState extends State<AppointmentsScreenNew>
     return "${displayHour.toString().padLeft(2, '0')}:${minute.toString().padLeft(2, '0')} $period";
   }
 }
-
 
 enum CustomAppBarVariant {
   standard,
@@ -923,7 +987,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: GestureDetector(
-            onTap: onProfileTap ??
+            onTap:
+                onProfileTap ??
                 () => Navigator.pushNamed(context, '/profile-screen'),
             child: Container(
               decoration: BoxDecoration(
@@ -938,8 +1003,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               ),
               child: CircleAvatar(
                 radius: 18,
-                backgroundColor:
-                    Theme.of(context).colorScheme.primary.withAlpha(26),
+                backgroundColor: Theme.of(
+                  context,
+                ).colorScheme.primary.withAlpha(26),
                 child: Icon(
                   Icons.person,
                   size: 20,
@@ -1008,7 +1074,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           Padding(
             padding: const EdgeInsets.only(right: 16, left: 4),
             child: GestureDetector(
-              onTap: onProfileTap ??
+              onTap:
+                  onProfileTap ??
                   () => Navigator.pushNamed(context, '/profile-screen'),
               child: Container(
                 decoration: BoxDecoration(
@@ -1072,7 +1139,8 @@ class AppointmentCardWidget extends StatelessWidget {
     final colorScheme = theme.colorScheme;
 
     final String status = (appointment["status"] as String?) ?? "confirmed";
-    final bool canJoin = isUpcoming &&
+    final bool canJoin =
+        isUpcoming &&
         status == "confirmed" &&
         _isWithinJoinWindow(appointment["dateTime"] as DateTime?);
 
@@ -1092,7 +1160,8 @@ class AppointmentCardWidget extends StatelessWidget {
       child: Column(
         children: [
           _buildMainContent(context, theme, colorScheme, canJoin),
-          if (isUpcoming) _buildUpcomingActions(context, theme, colorScheme, canJoin),
+          if (isUpcoming)
+            _buildUpcomingActions(context, theme, colorScheme, canJoin),
           if (!isUpcoming) _buildPastActions(context, theme, colorScheme),
         ],
       ),
@@ -1256,10 +1325,7 @@ class AppointmentCardWidget extends StatelessWidget {
       decoration: BoxDecoration(
         color: badgeColor.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(
-          color: badgeColor.withValues(alpha: 0.3),
-          width: 1,
-        ),
+        border: Border.all(color: badgeColor.withValues(alpha: 0.3), width: 1),
       ),
       child: Text(
         badgeText,
@@ -1280,11 +1346,7 @@ class AppointmentCardWidget extends StatelessWidget {
   ) {
     return Row(
       children: [
-        Icon(
-          _getIconData(iconName),
-          color: colorScheme.primary,
-          size: 16,
-        ),
+        Icon(_getIconData(iconName), color: colorScheme.primary, size: 16),
         SizedBox(width: 2.w),
         Expanded(
           child: Text(
@@ -1365,11 +1427,7 @@ class AppointmentCardWidget extends StatelessWidget {
                 color: colorScheme.primary.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: Icon(
-                Icons.phone,
-                color: colorScheme.primary,
-                size: 20,
-              ),
+              child: Icon(Icons.phone, color: colorScheme.primary, size: 20),
             ),
           ),
         ],
@@ -1425,11 +1483,7 @@ class AppointmentCardWidget extends StatelessWidget {
                 color: colorScheme.primary.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: Icon(
-                Icons.download,
-                color: colorScheme.primary,
-                size: 20,
-              ),
+              child: Icon(Icons.download, color: colorScheme.primary, size: 20),
             ),
           ),
         ],
@@ -1533,8 +1587,11 @@ class AppointmentCardWidget extends StatelessWidget {
   String _formatDate(DateTime dateTime) {
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
-    final appointmentDate =
-        DateTime(dateTime.year, dateTime.month, dateTime.day);
+    final appointmentDate = DateTime(
+      dateTime.year,
+      dateTime.month,
+      dateTime.day,
+    );
 
     if (appointmentDate == today) {
       return "Today";
@@ -1544,8 +1601,18 @@ class AppointmentCardWidget extends StatelessWidget {
       return "Yesterday";
     } else {
       const months = [
-        'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+        'Jan',
+        'Feb',
+        'Mar',
+        'Apr',
+        'May',
+        'Jun',
+        'Jul',
+        'Aug',
+        'Sep',
+        'Oct',
+        'Nov',
+        'Dec',
       ];
       return "${dateTime.day} ${months[dateTime.month - 1]}";
     }
@@ -1586,7 +1653,6 @@ class AppointmentCardWidget extends StatelessWidget {
   }
 }
 
-
 class AppointmentFilterWidget extends StatefulWidget {
   final Function(Map<String, dynamic>) onFiltersChanged;
   final Map<String, dynamic> currentFilters;
@@ -1610,7 +1676,7 @@ class _AppointmentFilterWidgetState extends State<AppointmentFilterWidget> {
     'Video',
     'Clinic',
     'Chat',
-    'Home Visit'
+    'Home Visit',
   ];
 
   final List<String> _specialties = [
@@ -1622,7 +1688,7 @@ class _AppointmentFilterWidgetState extends State<AppointmentFilterWidget> {
     'Orthopedic',
     'Dermatologist',
     'Neurologist',
-    'General Physician'
+    'General Physician',
   ];
 
   final List<String> _dateRanges = [
@@ -1631,7 +1697,7 @@ class _AppointmentFilterWidgetState extends State<AppointmentFilterWidget> {
     'This Week',
     'This Month',
     'Last 3 Months',
-    'Last 6 Months'
+    'Last 6 Months',
   ];
 
   @override
@@ -1733,11 +1799,7 @@ class _AppointmentFilterWidgetState extends State<AppointmentFilterWidget> {
                 color: colorScheme.outline.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: Icon(
-                Icons.close,
-                color: colorScheme.onSurface,
-                size: 20,
-              ),
+              child: Icon(Icons.close, color: colorScheme.onSurface, size: 20),
             ),
           ),
         ],
@@ -1894,7 +1956,6 @@ class _AppointmentFilterWidgetState extends State<AppointmentFilterWidget> {
   }
 }
 
-
 class CalendarViewWidget extends StatefulWidget {
   final List<Map<String, dynamic>> appointments;
   final Function(DateTime) onDateSelected;
@@ -1922,7 +1983,11 @@ class _CalendarViewWidgetState extends State<CalendarViewWidget> {
   }
 
   // Helper to safely convert nullable TextStyle? to non-nullable TextStyle
-  TextStyle _safeStyle(TextStyle? base, {Color? color, FontWeight? fontWeight}) {
+  TextStyle _safeStyle(
+    TextStyle? base, {
+    Color? color,
+    FontWeight? fontWeight,
+  }) {
     return (base ?? const TextStyle()).copyWith(
       color: color,
       fontWeight: fontWeight,
@@ -1971,11 +2036,7 @@ class _CalendarViewWidgetState extends State<CalendarViewWidget> {
       ),
       child: Row(
         children: [
-          Icon(
-            Icons.calendar_today,
-            color: colorScheme.primary,
-            size: 24,
-          ),
+          Icon(Icons.calendar_today, color: colorScheme.primary, size: 24),
           SizedBox(width: 3.w),
           Expanded(
             child: Text(
@@ -2124,7 +2185,9 @@ class _CalendarViewWidgetState extends State<CalendarViewWidget> {
   }
 
   Widget _buildSelectedDateAppointments(
-      BuildContext context, ColorScheme colorScheme) {
+    BuildContext context,
+    ColorScheme colorScheme,
+  ) {
     final theme = Theme.of(context);
     final dayAppointments = _getEventsForDay(widget.selectedDate);
 
@@ -2171,11 +2234,10 @@ class _CalendarViewWidgetState extends State<CalendarViewWidget> {
           ),
           SizedBox(height: 2.h),
           ...dayAppointments
-              .map((appointment) => _buildAppointmentItem(
-                    context,
-                    appointment,
-                    colorScheme,
-                  ))
+              .map(
+                (appointment) =>
+                    _buildAppointmentItem(context, appointment, colorScheme),
+              )
               .toList(),
         ],
       ),
@@ -2215,10 +2277,7 @@ class _CalendarViewWidgetState extends State<CalendarViewWidget> {
       decoration: BoxDecoration(
         color: colorScheme.surface,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: statusColor.withValues(alpha: 0.3),
-          width: 1,
-        ),
+        border: Border.all(color: statusColor.withValues(alpha: 0.3), width: 1),
       ),
       child: Row(
         children: [
@@ -2305,8 +2364,18 @@ class _CalendarViewWidgetState extends State<CalendarViewWidget> {
 
   String _formatSelectedDate(DateTime date) {
     const months = [
-      'January', 'February', 'March', 'April', 'May', 'June',
-      'July', 'August', 'September', 'October', 'November', 'December'
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
     ];
     return "${date.day} ${months[date.month - 1]}, ${date.year}";
   }
