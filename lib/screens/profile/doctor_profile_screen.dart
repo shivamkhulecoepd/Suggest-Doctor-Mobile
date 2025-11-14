@@ -11,9 +11,22 @@ class DoctorProfileScreen extends StatefulWidget {
   State<DoctorProfileScreen> createState() => _DoctorProfileScreenState();
 }
 
-class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
+class _DoctorProfileScreenState extends State<DoctorProfileScreen> with TickerProviderStateMixin {
+  late TabController _tabController;
   int _selectedTab = 0;
   final List<String> _tabs = ['Overview', 'Reviews', 'Clinic Info', 'Articles', 'Q&A'];
+  
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: _tabs.length, vsync: this);
+  }
+  
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
   
   @override
   Widget build(BuildContext context) {
@@ -185,7 +198,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
           SliverPersistentHeader(
             delegate: _SliverAppBarDelegate(
               TabBar(
-                controller: TabController(length: _tabs.length, vsync: _SliverAppBarDelegateState()),
+                controller: _tabController,
                 labelColor: Theme.of(context).colorScheme.primary,
                 unselectedLabelColor: Theme.of(context).colorScheme.secondary,
                 indicatorColor: Theme.of(context).colorScheme.primary,
@@ -200,26 +213,32 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
             pinned: true,
           ),
           
-          // Tab content
-          SliverFillRemaining(
-            child: TabBarView(
-              controller: TabController(length: _tabs.length, vsync: _SliverAppBarDelegateState()),
-              children: [
-                // Overview tab
-                _OverviewTab(),
-                
-                // Reviews tab
-                _ReviewsTab(),
-                
-                // Clinic Info tab
-                _ClinicInfoTab(),
-                
-                // Articles tab
-                _ArticlesTab(),
-                
-                // Q&A tab
-                _QATab(),
-              ],
+          // Tab content - Fixed the sliver geometry issue
+          SliverToBoxAdapter(
+            child: SizedBox(
+              height: MediaQuery.of(context).size.height - 
+                      kToolbarHeight - 
+                      MediaQuery.of(context).padding.top -
+                      Responsive.size(context, 48), // Tab bar height
+              child: TabBarView(
+                controller: _tabController,
+                children: [
+                  // Overview tab
+                  _OverviewTab(),
+                  
+                  // Reviews tab
+                  _ReviewsTab(),
+                  
+                  // Clinic Info tab
+                  _ClinicInfoTab(),
+                  
+                  // Articles tab
+                  _ArticlesTab(),
+                  
+                  // Q&A tab
+                  _QATab(),
+                ],
+              ),
             ),
           ),
         ],
@@ -324,13 +343,6 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   @override
   bool shouldRebuild(_SliverAppBarDelegate oldDelegate) {
     return false;
-  }
-}
-
-class _SliverAppBarDelegateState extends TickerProvider {
-  @override
-  Ticker createTicker(TickerCallback onTick) {
-    return Ticker(onTick);
   }
 }
 

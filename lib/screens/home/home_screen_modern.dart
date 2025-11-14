@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:suggest_doctor/screens/booking/appointments_screen_new.dart';
 import 'package:suggest_doctor/screens/ecommerce/medicines_listing_screen.dart';
+import 'package:suggest_doctor/screens/profile/doctor_profile_screen.dart';
+import 'package:suggest_doctor/screens/profile/enhanced_doctor_profile_screen.dart';
 import '../../core/constants.dart';
 import '../../core/responsive.dart';
 import '../../widgets/background_image_widget.dart';
@@ -359,122 +361,147 @@ class HomeContentModern extends StatelessWidget {
               ),
               itemCount: 5,
               itemBuilder: (context, index) {
-                return Container(
-                  width: Responsive.size(context, 160),
-                  margin: EdgeInsets.only(
-                    right: Responsive.spacing(context, AppConstants.spacingSm),
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(
-                      Responsive.size(context, AppConstants.radiusLg),
+                return InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DoctorProfileScreen(),
+                        // builder: (context) => EnhancedDoctorProfileScreen(),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    width: Responsive.size(context, 160),
+                    margin: EdgeInsets.only(
+                      right: Responsive.spacing(
+                        context,
+                        AppConstants.spacingSm,
+                      ),
                     ),
-                    color: Theme.of(context).cardColor,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.05),
-                        blurRadius: Responsive.size(context, 10),
-                        offset: Offset(0, Responsive.size(context, 2)),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(
+                        Responsive.size(context, AppConstants.radiusLg),
                       ),
-                    ],
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // Doctor image with online indicator
-                      Stack(
-                        children: [
-                          Container(
-                            height: Responsive.size(context, 100),
-                            decoration: const BoxDecoration(
-                              borderRadius: BorderRadius.vertical(
-                                top: Radius.circular(16),
-                              ),
-                              color: Color(0xFFE3F2FD),
-                            ),
-                            child: Center(
-                              child: Icon(
-                                Icons.person,
-                                size: Responsive.size(context, 50),
-                                color: Color(0xFF2196F3),
-                              ),
-                            ),
-                          ),
-                          Positioned(
-                            right: Responsive.spacing(context, 10),
-                            bottom: Responsive.spacing(context, 10),
-                            child: Container(
-                              width: Responsive.size(context, 12),
-                              height: Responsive.size(context, 12),
-                              decoration: const BoxDecoration(
-                                color: Colors.green,
-                                shape: BoxShape.circle,
-                                border: Border.fromBorderSide(
-                                  BorderSide(color: Colors.white, width: 2),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(
-                          Responsive.spacing(context, AppConstants.spacingSm),
+                      color: Theme.of(context).cardColor,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.05),
+                          blurRadius: Responsive.size(context, 10),
+                          offset: Offset(0, Responsive.size(context, 2)),
                         ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                      ],
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // Doctor image with online indicator
+                        Stack(
                           children: [
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.pushNamed(context, '/doctor_profile');
-                              },
-                              child: Text(
-                                'Dr. John Smith',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: Responsive.fontSize(context, 16),
+                            Container(
+                              height: Responsive.size(context, 100),
+                              decoration: const BoxDecoration(
+                                borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(16),
+                                ),
+                                color: Color(0xFFE3F2FD),
+                              ),
+                              child: Center(
+                                child: Icon(
+                                  Icons.person,
+                                  size: Responsive.size(context, 50),
+                                  color: Color(0xFF2196F3),
                                 ),
                               ),
                             ),
-                            SizedBox(height: Responsive.spacing(context, 4)),
-                            Text(
-                              'Cardiologist',
-                              style: TextStyle(
-                                fontSize: Responsive.fontSize(context, 12),
-                                color: Colors.grey,
+                            Positioned(
+                              right: Responsive.spacing(context, 10),
+                              bottom: Responsive.spacing(context, 10),
+                              child: Container(
+                                width: Responsive.size(context, 12),
+                                height: Responsive.size(context, 12),
+                                decoration: const BoxDecoration(
+                                  color: Colors.green,
+                                  shape: BoxShape.circle,
+                                  border: Border.fromBorderSide(
+                                    BorderSide(color: Colors.white, width: 2),
+                                  ),
+                                ),
                               ),
-                            ),
-                            SizedBox(height: Responsive.spacing(context, 8)),
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.star,
-                                  size: Responsive.size(context, 16),
-                                  color: Colors.amber,
-                                ),
-                                SizedBox(width: Responsive.spacing(context, 4)),
-                                Text(
-                                  '4.8',
-                                  style: TextStyle(
-                                    fontSize: Responsive.fontSize(context, 12),
-                                  ),
-                                ),
-                                Spacer(),
-                                Text(
-                                  '\$50',
-                                  style: TextStyle(
-                                    fontSize: Responsive.fontSize(context, 14),
-                                    color: Theme.of(
-                                      context,
-                                    ).colorScheme.primary,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
                             ),
                           ],
                         ),
-                      ),
-                    ],
+                        Padding(
+                          padding: EdgeInsets.all(
+                            Responsive.spacing(context, AppConstants.spacingSm),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.pushNamed(
+                                    context,
+                                    '/doctor_profile',
+                                  );
+                                },
+                                child: Text(
+                                  'Dr. John Smith',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: Responsive.fontSize(context, 16),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: Responsive.spacing(context, 4)),
+                              Text(
+                                'Cardiologist',
+                                style: TextStyle(
+                                  fontSize: Responsive.fontSize(context, 12),
+                                  color: Colors.grey,
+                                ),
+                              ),
+                              SizedBox(height: Responsive.spacing(context, 8)),
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.star,
+                                    size: Responsive.size(context, 16),
+                                    color: Colors.amber,
+                                  ),
+                                  SizedBox(
+                                    width: Responsive.spacing(context, 4),
+                                  ),
+                                  Text(
+                                    '4.8',
+                                    style: TextStyle(
+                                      fontSize: Responsive.fontSize(
+                                        context,
+                                        12,
+                                      ),
+                                    ),
+                                  ),
+                                  Spacer(),
+                                  Text(
+                                    '\$50',
+                                    style: TextStyle(
+                                      fontSize: Responsive.fontSize(
+                                        context,
+                                        14,
+                                      ),
+                                      color: Theme.of(
+                                        context,
+                                      ).colorScheme.primary,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 );
               },
