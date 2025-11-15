@@ -57,8 +57,8 @@ class MyApp extends StatelessWidget {
             theme: AppThemes.light,
             darkTheme: AppThemes.dark,
             // initialRoute: '/splash',
-            initialRoute: '/doctor_profile_demo',
-            // initialRoute: '/doctor_profile',
+            // initialRoute: '/doctor_profile_demo',
+            initialRoute: '/doctor_profile',
             // initialRoute: '/home',
             routes: {
               '/splash': (context) => const SplashScreen(),
