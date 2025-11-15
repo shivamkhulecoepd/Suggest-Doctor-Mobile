@@ -72,7 +72,6 @@ class _MedicineDetailScreenState extends State<MedicineDetailScreen> {
             fontWeight: FontWeight.w600,
           ),
         ),
-        automaticallyImplyLeading: false,
         actions: [
           IconButton(
             icon: Container(
@@ -127,14 +126,15 @@ class _MedicineDetailScreenState extends State<MedicineDetailScreen> {
                   height: 250,
                   width: double.infinity,
                   color: colorScheme.primary.withValues(alpha: 0.1),
-                  child: Center(
-                    child: NetworkImageWidget(
-                      imageUrl: widget.medicine.imageUrl,
-                      width: 180,
-                      height: 180,
-                      fit: BoxFit.contain,
-                    ),
-                  ),
+                  // child: Center(
+                  //   child: NetworkImageWidget(
+                  //     imageUrl: widget.medicine.imageUrl,
+                  //     width: 180,
+                  //     height: 180,
+                  //     fit: BoxFit.contain,
+                  //   ),
+                  // ),
+                  child: Image.network(widget.medicine.imageUrl, fit: BoxFit.cover),
                 ),
                 // Prescription required badge
                 if (widget.medicine.prescriptionRequired)
@@ -417,6 +417,7 @@ class _MedicineDetailScreenState extends State<MedicineDetailScreen> {
                   
                   // Medicine information tabs
                   _buildInfoTabs(),
+                  const SizedBox(height: 24),
                 ],
               ),
             ),

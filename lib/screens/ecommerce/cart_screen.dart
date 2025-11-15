@@ -13,7 +13,7 @@ class CartScreen extends StatefulWidget {
 
 class _CartScreenState extends State<CartScreen> {
   // Sample cart items
-  List<CartItem> _cartItems = [
+  final List<CartItem> _cartItems = [
     CartItem(
       medicine: Medicine(
         id: '1',
@@ -188,7 +188,6 @@ class _CartScreenState extends State<CartScreen> {
             fontWeight: FontWeight.w600,
           ),
         ),
-        automaticallyImplyLeading: false,
         actions: [
           IconButton(
             icon: Container(

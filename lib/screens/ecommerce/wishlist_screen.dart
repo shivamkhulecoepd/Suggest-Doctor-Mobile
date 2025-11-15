@@ -101,7 +101,6 @@ class _WishlistScreenState extends State<WishlistScreen> {
             fontWeight: FontWeight.w600,
           ),
         ),
-        automaticallyImplyLeading: false,
         actions: [
           IconButton(
             icon: Container(

@@ -20,7 +20,6 @@ import 'package:suggest_doctor/screens/home/home_screen_modern.dart';
 import 'package:suggest_doctor/screens/profile/doctor_profile_screen.dart';
 import 'package:suggest_doctor/screens/profile/enhanced_doctor_profile_screen.dart';
 import 'package:suggest_doctor/screens/profile/patient_profile_screen.dart';
-import 'package:suggest_doctor/screens/profile/doctor_profile_demo.dart';
 import 'package:suggest_doctor/screens/home/search_results_screen.dart';
 import 'core/navigation_service.dart';
 import 'themes/app_theme.dart';
@@ -57,7 +56,10 @@ class MyApp extends StatelessWidget {
             title: 'Suggest Doctor',
             theme: AppThemes.light,
             darkTheme: AppThemes.dark,
-            initialRoute: '/splash',
+            // initialRoute: '/splash',
+            initialRoute: '/doctor_profile_demo',
+            // initialRoute: '/doctor_profile',
+            // initialRoute: '/home',
             routes: {
               '/splash': (context) => const SplashScreen(),
               '/onboarding': (context) => const OnboardingScreen(),
@@ -70,7 +72,7 @@ class MyApp extends StatelessWidget {
               '/search': (context) =>
                   const SearchResultsScreen(query: 'cardiologist'),
               '/doctor_profile': (context) =>
-                  const EnhancedDoctorProfileScreen(),
+                  const DoctorProfileScreen(),
               '/booking': (context) => const BookingFlowScreen(),
               '/booking_confirmation': (context) =>
                   const BookingConfirmationScreen(),
@@ -98,7 +100,7 @@ class MyApp extends StatelessWidget {
               ),
               '/health_feed': (context) => const HealthFeedScreen(),
               '/payments_wallet': (context) => const PaymentsWalletScreen(),
-              '/doctor_profile_demo': (context) => const DoctorProfileDemo(),
+              '/doctor_profile_demo': (context) => const EnhancedDoctorProfileScreen(),
             },
             // Add navigator key for better navigation management
             navigatorKey: NavigationService.navigatorKey,

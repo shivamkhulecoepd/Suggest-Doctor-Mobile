@@ -14,16 +14,15 @@ class EnhancedDoctorProfileScreen extends StatefulWidget {
 }
 
 class _EnhancedDoctorProfileScreenState
-    extends State<EnhancedDoctorProfileScreen>
-    with TickerProviderStateMixin {
+    extends State<EnhancedDoctorProfileScreen> with TickerProviderStateMixin {
   late TabController _tabController;
   final List<String> _tabs = [
     'Overview',
     'Reviews',
     'Services',
-    'Clinic Info',
     'Articles',
     'Q&A',
+    'Clinic Info'  // Added Clinic Info tab
   ];
 
   @override
@@ -177,24 +176,24 @@ class _EnhancedDoctorProfileScreenState
     final colorScheme = theme.colorScheme;
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
-      // appBar: AppBar(
-      //   title: Text(
-      //     _doctorData.name,
-      //     style: TextStyle(
-      //       fontSize: Responsive.fontSize(context, 18),
-      //       fontWeight: FontWeight.bold,
-      //     ),
-      //   ),
-      //   backgroundColor: colorScheme.surface,
-      //   elevation: 0,
-      //   // leading: IconButton(
-      //   // icon: Icon(
-      //   // Icons.arrow_back,
-      //   // color: colorScheme.onSurface,
-      //   // ),
-      //   // onPressed: () => Navigator.of(context).pop(),
-      //   // ),
-      // ),
+      appBar: AppBar(
+        title: Text(
+          _doctorData.name,
+          style: TextStyle(
+            fontSize: Responsive.fontSize(context, 18),
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        backgroundColor: colorScheme.surface,
+        elevation: 0,
+        // leading: IconButton(
+        // icon: Icon(
+        // Icons.arrow_back,
+        // color: colorScheme.onSurface,
+        // ),
+        // onPressed: () => Navigator.of(context).pop(),
+        // ),
+      ),
       body: CustomScrollView(
         slivers: [
           // Sliver app bar with doctor header
@@ -250,8 +249,7 @@ class _EnhancedDoctorProfileScreenState
                                     right: 0,
                                     child: Container(
                                       padding: EdgeInsets.all(
-                                        Responsive.spacing(context, 4),
-                                      ),
+                                          Responsive.spacing(context, 4)),
                                       decoration: BoxDecoration(
                                         color: LightColors.success,
                                         shape: BoxShape.circle,
@@ -281,9 +279,7 @@ class _EnhancedDoctorProfileScreenState
                                             _doctorData.name,
                                             style: TextStyle(
                                               fontSize: Responsive.fontSize(
-                                                context,
-                                                24,
-                                              ),
+                                                  context, 24),
                                               fontWeight: FontWeight.bold,
                                               color: Colors.white,
                                             ),
@@ -291,28 +287,23 @@ class _EnhancedDoctorProfileScreenState
                                         ),
                                         Container(
                                           padding: EdgeInsets.symmetric(
-                                            horizontal: Responsive.spacing(
-                                              context,
-                                              8,
-                                            ),
-                                            vertical: Responsive.spacing(
-                                              context,
-                                              4,
-                                            ),
+                                            horizontal:
+                                                Responsive.spacing(context, 8),
+                                            vertical:
+                                                Responsive.spacing(context, 4),
                                           ),
                                           decoration: BoxDecoration(
                                             color: LightColors.success,
-                                            borderRadius: BorderRadius.circular(
-                                              Responsive.size(context, 12),
-                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(
+                                                    Responsive.size(
+                                                        context, 12)),
                                           ),
                                           child: Text(
                                             'Verified',
                                             style: TextStyle(
                                               fontSize: Responsive.fontSize(
-                                                context,
-                                                12,
-                                              ),
+                                                  context, 12),
                                               color: Colors.white,
                                               fontWeight: FontWeight.bold,
                                             ),
@@ -321,21 +312,19 @@ class _EnhancedDoctorProfileScreenState
                                       ],
                                     ),
                                     SizedBox(
-                                      height: Responsive.spacing(context, 4),
-                                    ),
+                                        height:
+                                            Responsive.spacing(context, 4)),
                                     Text(
                                       _doctorData.specialty,
                                       style: TextStyle(
-                                        fontSize: Responsive.fontSize(
-                                          context,
-                                          16,
-                                        ),
+                                        fontSize:
+                                            Responsive.fontSize(context, 16),
                                         color: Colors.white70,
                                       ),
                                     ),
                                     SizedBox(
-                                      height: Responsive.spacing(context, 4),
-                                    ),
+                                        height:
+                                            Responsive.spacing(context, 4)),
                                     Row(
                                       children: [
                                         Icon(
@@ -344,15 +333,13 @@ class _EnhancedDoctorProfileScreenState
                                           color: Colors.amber,
                                         ),
                                         SizedBox(
-                                          width: Responsive.spacing(context, 4),
-                                        ),
+                                            width:
+                                                Responsive.spacing(context, 4)),
                                         Text(
                                           '${_doctorData.rating} (${_doctorData.reviewCount} reviews)',
                                           style: TextStyle(
                                             fontSize: Responsive.fontSize(
-                                              context,
-                                              14,
-                                            ),
+                                                context, 14),
                                             color: Colors.white,
                                           ),
                                         ),
@@ -371,9 +358,8 @@ class _EnhancedDoctorProfileScreenState
                                   // Save to favorites
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     const SnackBar(
-                                      content: Text(
-                                        'Added to favorites successfully',
-                                      ),
+                                      content:
+                                          Text('Added to favorites successfully'),
                                       backgroundColor: LightColors.success,
                                       behavior: SnackBarBehavior.floating,
                                     ),
@@ -385,17 +371,16 @@ class _EnhancedDoctorProfileScreenState
                           // Key info row
                           SizedBox(height: Responsive.spacing(context, 20)),
                           Container(
-                            padding: EdgeInsets.all(
-                              Responsive.spacing(context, 12),
-                            ),
+                            padding:
+                                EdgeInsets.all(Responsive.spacing(context, 12)),
                             decoration: BoxDecoration(
                               color: Colors.white.withOpacity(0.2),
                               borderRadius: BorderRadius.circular(
-                                Responsive.size(context, 12),
-                              ),
+                                  Responsive.size(context, 12)),
                             ),
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              mainAxisAlignment:
+                                  MainAxisAlignment.spaceAround,
                               children: [
                                 _InfoItem(
                                   icon: Icons.work,
@@ -435,7 +420,11 @@ class _EnhancedDoctorProfileScreenState
                 indicatorColor: colorScheme.primary,
                 indicatorWeight: Responsive.size(context, 3),
                 isScrollable: true,
-                tabs: _tabs.map((tab) => Tab(text: tab)).toList(),
+                tabs: _tabs
+                    .map((tab) => Tab(
+                          text: tab,
+                        ))
+                    .toList(),
               ),
             ),
             pinned: true,
@@ -451,8 +440,6 @@ class _EnhancedDoctorProfileScreenState
                 _ReviewsTab(reviews: _doctorData.reviews),
                 // Services tab
                 _ServicesTab(services: _doctorData.services),
-                // Clinic Info tab
-                _ClinicInfoTab(clinic: _doctorData.clinic),
                 // Articles tab
                 _ArticlesTab(articles: _doctorData.articles),
                 // Q&A tab
@@ -463,76 +450,32 @@ class _EnhancedDoctorProfileScreenState
         ],
       ),
       // Add floating action button for booking
-      // Booking button at bottom
-      bottomNavigationBar: Container(
-        padding: EdgeInsets.all(Responsive.spacing(context, 16)),
-        decoration: BoxDecoration(
-          color: Theme.of(context).scaffoldBackgroundColor,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              blurRadius: Responsive.size(context, 10),
-              offset: const Offset(0, -5),
-            ),
-          ],
-        ),
-        child: Row(
-          children: [
-            Expanded(
-              child: ElevatedButton(
-                onPressed: _showBookingBottomSheet,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Theme.of(context).colorScheme.primary,
-                  foregroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(
-                      Responsive.size(context, 16),
-                    ),
-                  ),
-                  padding: EdgeInsets.symmetric(
-                    vertical: Responsive.spacing(context, 16),
-                  ),
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            heroTag: "video_call",
+            onPressed: () {
+              // Video consultation
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('Starting video consultation...'),
+                  backgroundColor: LightColors.primary,
+                  behavior: SnackBarBehavior.floating,
                 ),
-                child: Text(
-                  'Book Appointment',
-                  style: TextStyle(
-                    fontSize: Responsive.fontSize(context, 16),
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(width: Responsive.spacing(context, 12)),
-            Container(
-              width: Responsive.size(context, 50),
-              height: Responsive.size(context, 50),
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(
-                  Responsive.size(context, 25),
-                ),
-              ),
-              child: IconButton(
-                icon: Icon(
-                  Icons.video_call,
-                  color: Theme.of(context).colorScheme.primary,
-                  size: Responsive.size(context, 24),
-                ),
-                onPressed: () {
-                  // Video consultation
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Starting video consultation...'),
-                      backgroundColor: LightColors.primary,
-                      behavior: SnackBarBehavior.floating,
-                    ),
-                  );
-                },
-              ),
-            ),
-          ],
-        ),
+              );
+            },
+            child: const Icon(Icons.video_call),
+          ),
+          const SizedBox(height: 16),
+          FloatingActionButton(
+            heroTag: "book_appointment",
+            onPressed: _showBookingBottomSheet,
+            child: const Icon(Icons.calendar_today),
+          ),
+        ],
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
 }
@@ -550,10 +493,7 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
 
   @override
   Widget build(
-    BuildContext context,
-    double shrinkOffset,
-    bool overlapsContent,
-  ) {
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
     return Container(
       height: minExtent,
       color: Theme.of(context).scaffoldBackgroundColor,
@@ -724,22 +664,18 @@ class _OverviewTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> slotWidgets = doctorData.availability
-        .map<Widget>(
-          (slot) => _SlotItem(
-            date: slot.date,
-            time: slot.time,
-            type: slot.type,
-            available: slot.available,
-          ),
-        )
+        .map<Widget>((slot) => _SlotItem(
+              date: slot.date,
+              time: slot.time,
+              type: slot.type,
+              available: slot.available,
+            ))
         .toList();
-    slotWidgets.insertBetween(
-      Divider(
-        height: Responsive.spacing(context, 16),
-        thickness: 0.5,
-        color: Theme.of(context).dividerColor,
-      ),
-    );
+    slotWidgets.insertBetween(Divider(
+      height: Responsive.spacing(context, 16),
+      thickness: 0.5,
+      color: Theme.of(context).dividerColor,
+    ));
     return SingleChildScrollView(
       padding: EdgeInsets.all(Responsive.spacing(context, 16)),
       child: Column(
@@ -771,20 +707,21 @@ class _OverviewTab extends StatelessWidget {
             ),
           ),
           SizedBox(height: Responsive.spacing(context, 12)),
-          ...doctorData.education.map(
-            (edu) => _ExperienceItem(
-              title: edu.degree,
-              institution: edu.institution,
-              year: edu.year,
-            ),
-          ),
+          ...doctorData.education.map((edu) => _ExperienceItem(
+                title: edu.degree,
+                institution: edu.institution,
+                year: edu.year,
+              )),
           SizedBox(height: Responsive.spacing(context, 16)),
           Container(
             padding: EdgeInsets.all(Responsive.spacing(context, 16)),
             decoration: BoxDecoration(
               color: Theme.of(context).cardColor,
-              borderRadius: BorderRadius.circular(Responsive.size(context, 12)),
-              border: Border.all(color: Theme.of(context).dividerColor),
+              borderRadius:
+                  BorderRadius.circular(Responsive.size(context, 12)),
+              border: Border.all(
+                color: Theme.of(context).dividerColor,
+              ),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -797,29 +734,26 @@ class _OverviewTab extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: Responsive.spacing(context, 8)),
-                ...doctorData.certifications.map(
-                  (cert) => Padding(
-                    padding: EdgeInsets.only(
-                      bottom: Responsive.spacing(context, 8),
-                    ),
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.verified,
-                          size: Responsive.size(context, 16),
-                          color: LightColors.success,
-                        ),
-                        SizedBox(width: Responsive.spacing(context, 8)),
-                        Text(
-                          cert,
-                          style: TextStyle(
-                            fontSize: Responsive.fontSize(context, 14),
+                ...doctorData.certifications.map((cert) => Padding(
+                      padding: EdgeInsets.only(
+                          bottom: Responsive.spacing(context, 8)),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.verified,
+                            size: Responsive.size(context, 16),
+                            color: LightColors.success,
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                          SizedBox(width: Responsive.spacing(context, 8)),
+                          Text(
+                            cert,
+                            style: TextStyle(
+                              fontSize: Responsive.fontSize(context, 14),
+                            ),
+                          ),
+                        ],
+                      ),
+                    )),
               ],
             ),
           ),
@@ -837,7 +771,8 @@ class _OverviewTab extends StatelessWidget {
             padding: EdgeInsets.all(Responsive.spacing(context, 16)),
             decoration: BoxDecoration(
               color: Theme.of(context).cardColor,
-              borderRadius: BorderRadius.circular(Responsive.size(context, 12)),
+              borderRadius:
+                  BorderRadius.circular(Responsive.size(context, 12)),
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withOpacity(0.05),
@@ -846,7 +781,9 @@ class _OverviewTab extends StatelessWidget {
                 ),
               ],
             ),
-            child: Column(children: slotWidgets),
+            child: Column(
+              children: slotWidgets,
+            ),
           ),
           SizedBox(height: Responsive.spacing(context, 24)),
           // Clinic Info
@@ -862,7 +799,8 @@ class _OverviewTab extends StatelessWidget {
             padding: EdgeInsets.all(Responsive.spacing(context, 16)),
             decoration: BoxDecoration(
               color: Theme.of(context).cardColor,
-              borderRadius: BorderRadius.circular(Responsive.size(context, 12)),
+              borderRadius:
+                  BorderRadius.circular(Responsive.size(context, 12)),
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withOpacity(0.05),
@@ -964,35 +902,34 @@ class _OverviewTab extends StatelessWidget {
                   spacing: Responsive.spacing(context, 8),
                   runSpacing: Responsive.spacing(context, 8),
                   children: doctorData.clinic.insurance
-                      .map(
-                        (insurance) => Container(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: Responsive.spacing(context, 12),
-                            vertical: Responsive.spacing(context, 6),
-                          ),
-                          decoration: BoxDecoration(
-                            color: Theme.of(
-                              context,
-                            ).colorScheme.primary.withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(
-                              Responsive.size(context, 20),
+                      .map((insurance) => Container(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: Responsive.spacing(context, 12),
+                              vertical: Responsive.spacing(context, 6),
                             ),
-                            border: Border.all(
-                              color: Theme.of(
-                                context,
-                              ).colorScheme.primary.withOpacity(0.3),
+                            decoration: BoxDecoration(
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .primary
+                                  .withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(
+                                  Responsive.size(context, 20)),
+                              border: Border.all(
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .primary
+                                    .withOpacity(0.3),
+                              ),
                             ),
-                          ),
-                          child: Text(
-                            insurance,
-                            style: TextStyle(
-                              fontSize: Responsive.fontSize(context, 12),
-                              color: Theme.of(context).colorScheme.primary,
-                              fontWeight: FontWeight.w500,
+                            child: Text(
+                              insurance,
+                              style: TextStyle(
+                                fontSize: Responsive.fontSize(context, 12),
+                                color: Theme.of(context).colorScheme.primary,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
-                          ),
-                        ),
-                      )
+                          ))
                       .toList(),
                 ),
               ],
@@ -1117,9 +1054,8 @@ class _SlotItem extends StatelessWidget {
         if (available)
           Container(
             padding: EdgeInsets.symmetric(
-              horizontal: Responsive.spacing(context, 12),
-              vertical: Responsive.spacing(context, 6),
-            ),
+                horizontal: Responsive.spacing(context, 12),
+                vertical: Responsive.spacing(context, 6)),
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
               borderRadius: BorderRadius.circular(Responsive.size(context, 20)),
@@ -1136,9 +1072,8 @@ class _SlotItem extends StatelessWidget {
         else
           Container(
             padding: EdgeInsets.symmetric(
-              horizontal: Responsive.spacing(context, 12),
-              vertical: Responsive.spacing(context, 6),
-            ),
+                horizontal: Responsive.spacing(context, 12),
+                vertical: Responsive.spacing(context, 6)),
             decoration: BoxDecoration(
               color: Colors.grey.withOpacity(0.1),
               borderRadius: BorderRadius.circular(Responsive.size(context, 20)),
@@ -1164,15 +1099,14 @@ class _ReviewsTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Calculate average rating
-    double averageRating =
-        reviews.fold(0.0, (sum, review) => sum + review.rating) /
+    double averageRating = reviews.fold(
+        0.0, (sum, review) => sum + review.rating) /
         reviews.length;
     List<Widget> reviewWidgets = reviews
         .map<Widget>((review) => _ReviewItem(review: review))
         .toList();
-    reviewWidgets.insertBetween(
-      SizedBox(height: Responsive.spacing(context, 16)),
-    );
+    reviewWidgets.insertBetween(SizedBox(
+        height: Responsive.spacing(context, 16)));
     return SingleChildScrollView(
       padding: EdgeInsets.all(Responsive.spacing(context, 16)),
       child: Column(
@@ -1183,7 +1117,8 @@ class _ReviewsTab extends StatelessWidget {
             padding: EdgeInsets.all(Responsive.spacing(context, 16)),
             decoration: BoxDecoration(
               color: Theme.of(context).cardColor,
-              borderRadius: BorderRadius.circular(Responsive.size(context, 12)),
+              borderRadius:
+                  BorderRadius.circular(Responsive.size(context, 12)),
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withOpacity(0.05),
@@ -1209,8 +1144,8 @@ class _ReviewsTab extends StatelessWidget {
                       index < averageRating.floor()
                           ? Icons.star
                           : (index < averageRating.ceil()
-                                ? Icons.star_half
-                                : Icons.star_border),
+                              ? Icons.star_half
+                              : Icons.star_border),
                       color: Colors.amber,
                       size: Responsive.size(context, 24),
                     );
@@ -1232,10 +1167,10 @@ class _ReviewsTab extends StatelessWidget {
           Row(
             children: [
               FilterChip(
-                label: Text(
-                  'Most Helpful',
-                  style: TextStyle(fontSize: Responsive.fontSize(context, 14)),
-                ),
+                label: Text('Most Helpful',
+                    style: TextStyle(
+                      fontSize: Responsive.fontSize(context, 14),
+                    )),
                 selected: true,
                 onSelected: (selected) {},
                 selectedColor: Theme.of(context).colorScheme.primary,
@@ -1243,10 +1178,10 @@ class _ReviewsTab extends StatelessWidget {
               ),
               SizedBox(width: Responsive.spacing(context, 8)),
               FilterChip(
-                label: Text(
-                  'Latest',
-                  style: TextStyle(fontSize: Responsive.fontSize(context, 14)),
-                ),
+                label: Text('Latest',
+                    style: TextStyle(
+                      fontSize: Responsive.fontSize(context, 14),
+                    )),
                 selected: false,
                 onSelected: (selected) {},
                 selectedColor: Theme.of(context).colorScheme.primary,
@@ -1362,27 +1297,25 @@ class _ServicesTab extends StatelessWidget {
             spacing: Responsive.spacing(context, 8),
             runSpacing: Responsive.spacing(context, 8),
             children: services
-                .map(
-                  (service) => Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: Responsive.spacing(context, 12),
-                      vertical: Responsive.spacing(context, 8),
-                    ),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).cardColor,
-                      borderRadius: BorderRadius.circular(
-                        Responsive.size(context, 20),
+                .map((service) => Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: Responsive.spacing(context, 12),
+                        vertical: Responsive.spacing(context, 8),
                       ),
-                      border: Border.all(color: Theme.of(context).dividerColor),
-                    ),
-                    child: Text(
-                      service,
-                      style: TextStyle(
-                        fontSize: Responsive.fontSize(context, 14),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).cardColor,
+                        borderRadius: BorderRadius.circular(Responsive.size(context, 20)),
+                        border: Border.all(
+                          color: Theme.of(context).dividerColor,
+                        ),
                       ),
-                    ),
-                  ),
-                )
+                      child: Text(
+                        service,
+                        style: TextStyle(
+                          fontSize: Responsive.fontSize(context, 14),
+                        ),
+                      ),
+                    ))
                 .toList(),
           ),
         ],
@@ -1457,24 +1390,20 @@ class _ArticleItem extends StatelessWidget {
             ),
           ),
           SizedBox(height: Responsive.spacing(context, 8)),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                article.readTime,
-                style: TextStyle(
-                  fontSize: Responsive.fontSize(context, 14),
-                  color: Theme.of(context).colorScheme.secondary,
-                ),
-              ),
-              Text(
-                article.date,
-                style: TextStyle(
-                  fontSize: Responsive.fontSize(context, 14),
-                  color: Theme.of(context).colorScheme.secondary,
-                ),
-              ),
-            ],
+          Text(
+            article.readTime,
+            style: TextStyle(
+              fontSize: Responsive.fontSize(context, 14),
+              color: Theme.of(context).colorScheme.secondary,
+            ),
+          ),
+          SizedBox(height: Responsive.spacing(context, 8)),
+          Text(
+            article.date,
+            style: TextStyle(
+              fontSize: Responsive.fontSize(context, 14),
+              color: Theme.of(context).colorScheme.secondary,
+            ),
           ),
           SizedBox(height: Responsive.spacing(context, 16)),
           Container(
@@ -1496,99 +1425,13 @@ class _ArticleItem extends StatelessWidget {
 class _QATab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final List<Map<String, String>> faqs = [
-      {
-        'question': 'What should I bring to my first appointment?',
-        'answer':
-            'Please bring your ID, insurance card, and any relevant medical records. Arrive 15 minutes early to complete paperwork.',
-      },
-      {
-        'question': 'Do you accept walk-ins?',
-        'answer':
-            'We recommend scheduling an appointment in advance, but walk-ins are welcome during regular hours.',
-      },
-      {
-        'question': 'How can I reschedule or cancel my appointment?',
-        'answer':
-            'You can reschedule or cancel your appointment through the app or by calling our clinic directly at least 24 hours in advance.',
-      },
-      {
-        'question': 'What payment methods do you accept?',
-        'answer':
-            'We accept cash, credit cards, debit cards, and most major insurance plans.',
-      },
-      {
-        'question': 'How long does a typical appointment last?',
-        'answer':
-            'Initial consultations typically last 30-45 minutes, while follow-up appointments are usually 15-30 minutes.',
-      },
-      {
-        'question': 'Do you offer telemedicine consultations?',
-        'answer':
-            'Yes, we offer video consultations for follow-up appointments and certain initial consultations. Please check with our staff for availability.',
-      },
-    ];
-
-    return SingleChildScrollView(
-      padding: EdgeInsets.all(Responsive.spacing(context, 16)),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Frequently Asked Questions',
-            style: TextStyle(
-              fontSize: Responsive.fontSize(context, 18),
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          SizedBox(height: Responsive.spacing(context, 16)),
-          ...faqs
-              .map(
-                (faq) => _FAQItem(
-                  question: faq['question']!,
-                  answer: faq['answer']!,
-                ),
-              )
-              .toList(),
-        ],
-      ),
-    );
-  }
-}
-
-class _FAQItem extends StatelessWidget {
-  final String question;
-  final String answer;
-
-  const _FAQItem({required this.question, required this.answer});
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      margin: EdgeInsets.only(bottom: Responsive.spacing(context, 12)),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(Responsive.size(context, 12)),
-      ),
-      child: ExpansionTile(
-        title: Text(
-          question,
-          style: TextStyle(
-            fontSize: Responsive.fontSize(context, 16),
-            fontWeight: FontWeight.w500,
-          ),
+    return Center(
+      child: Text(
+        'Q&A',
+        style: TextStyle(
+          fontSize: Responsive.fontSize(context, 18),
+          fontWeight: FontWeight.bold,
         ),
-        children: [
-          Padding(
-            padding: EdgeInsets.all(Responsive.spacing(context, 16)),
-            child: Text(
-              answer,
-              style: TextStyle(
-                fontSize: Responsive.fontSize(context, 14),
-                height: 1.5,
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }
@@ -1621,9 +1464,9 @@ class _ClinicInfoTab extends StatelessWidget {
               color: Colors.grey,
             ),
           ),
-
+          
           SizedBox(height: Responsive.spacing(context, 24)),
-
+          
           // Map placeholder with network image
           Container(
             height: Responsive.size(context, 200),
@@ -1639,9 +1482,9 @@ class _ClinicInfoTab extends StatelessWidget {
               ),
             ),
           ),
-
+          
           SizedBox(height: Responsive.spacing(context, 24)),
-
+          
           // Directions button
           SizedBox(
             width: double.infinity,
@@ -1650,23 +1493,24 @@ class _ClinicInfoTab extends StatelessWidget {
               onPressed: () {
                 // Open maps
               },
-              icon: Icon(Icons.directions, size: Responsive.size(context, 20)),
-              label: Text(
-                'Get Directions',
-                style: TextStyle(fontSize: Responsive.fontSize(context, 16)),
+              icon: Icon(Icons.directions,
+                size: Responsive.size(context, 20),
+              ),
+              label: Text('Get Directions',
+                style: TextStyle(
+                  fontSize: Responsive.fontSize(context, 16),
+                ),
               ),
               style: OutlinedButton.styleFrom(
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(
-                    Responsive.size(context, 12),
-                  ),
+                  borderRadius: BorderRadius.circular(Responsive.size(context, 12)),
                 ),
               ),
             ),
           ),
-
+          
           SizedBox(height: Responsive.spacing(context, 24)),
-
+          
           // Contact information
           Text(
             'Contact Information',
@@ -1712,7 +1556,9 @@ class _ClinicInfoTab extends StatelessWidget {
                 SizedBox(height: Responsive.spacing(context, 8)),
                 Text(
                   clinic.timings,
-                  style: TextStyle(fontSize: Responsive.fontSize(context, 14)),
+                  style: TextStyle(
+                    fontSize: Responsive.fontSize(context, 14),
+                  ),
                 ),
                 SizedBox(height: Responsive.spacing(context, 16)),
                 Row(
@@ -1735,7 +1581,9 @@ class _ClinicInfoTab extends StatelessWidget {
                 SizedBox(height: Responsive.spacing(context, 8)),
                 Text(
                   clinic.phone,
-                  style: TextStyle(fontSize: Responsive.fontSize(context, 14)),
+                  style: TextStyle(
+                    fontSize: Responsive.fontSize(context, 14),
+                  ),
                 ),
                 SizedBox(height: Responsive.spacing(context, 16)),
                 Row(
@@ -1758,14 +1606,16 @@ class _ClinicInfoTab extends StatelessWidget {
                 SizedBox(height: Responsive.spacing(context, 8)),
                 Text(
                   clinic.email,
-                  style: TextStyle(fontSize: Responsive.fontSize(context, 14)),
+                  style: TextStyle(
+                    fontSize: Responsive.fontSize(context, 14),
+                  ),
                 ),
               ],
             ),
           ),
-
+          
           SizedBox(height: Responsive.spacing(context, 24)),
-
+          
           // Insurance info
           Text(
             'Accepted Insurance',
@@ -1779,30 +1629,216 @@ class _ClinicInfoTab extends StatelessWidget {
             spacing: Responsive.spacing(context, 8),
             runSpacing: Responsive.spacing(context, 8),
             children: clinic.insurance
-                .map(
-                  (insurance) => Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: Responsive.spacing(context, 12),
-                      vertical: Responsive.spacing(context, 8),
-                    ),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).cardColor,
-                      borderRadius: BorderRadius.circular(
-                        Responsive.size(context, 20),
+                .map((insurance) => Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: Responsive.spacing(context, 12), 
+                        vertical: Responsive.spacing(context, 8)
                       ),
-                      border: Border.all(color: Theme.of(context).dividerColor),
-                    ),
-                    child: Text(
-                      insurance,
-                      style: TextStyle(
-                        fontSize: Responsive.fontSize(context, 14),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).cardColor,
+                        borderRadius: BorderRadius.circular(Responsive.size(context, 20)),
+                        border: Border.all(
+                          color: Theme.of(context).dividerColor,
+                        ),
                       ),
-                    ),
-                  ),
-                )
+                      child: Text(
+                        insurance,
+                        style: TextStyle(
+                          fontSize: Responsive.fontSize(context, 14),
+                        ),
+                      ),
+                    ))
                 .toList(),
           ),
         ],
+      ),
+    );
+  }
+}
+
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Services Offered',
+            style: TextStyle(
+              fontSize: Responsive.fontSize(context, 18),
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(height: Responsive.spacing(context, 12)),
+          Wrap(
+            spacing: Responsive.spacing(context, 12),
+            runSpacing: Responsive.spacing(context, 12),
+            children: services
+                .map((service) => Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: Responsive.spacing(context, 16),
+                        vertical: Responsive.spacing(context, 12),
+                      ),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).cardColor,
+                        borderRadius:
+                            BorderRadius.circular(Responsive.size(context, 12)),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.05),
+                            blurRadius: Responsive.size(context, 5),
+                            offset: const Offset(0, 1),
+                          ),
+                        ],
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            Icons.check_circle,
+                            size: Responsive.size(context, 16),
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
+                          SizedBox(width: Responsive.spacing(context, 8)),
+                          Text(
+                            service,
+                            style: TextStyle(
+                              fontSize: Responsive.fontSize(context, 14),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ))
+                .toList(),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ArticlesTab extends StatelessWidget {
+  final List<Article> articles;
+
+  const _ArticlesTab({required this.articles});
+
+  @override
+  Widget build(BuildContext context) {
+    List<Widget> articleWidgets = articles
+        .map<Widget>((article) => _ArticleItem(article: article))
+        .toList();
+    articleWidgets.insertBetween(SizedBox(
+        height: Responsive.spacing(context, 16)));
+    return SingleChildScrollView(
+      padding: EdgeInsets.all(Responsive.spacing(context, 16)),
+      child: Column(
+        children: articleWidgets,
+      ),
+    );
+  }
+}
+
+class _ArticleItem extends StatelessWidget {
+  final Article article;
+
+  const _ArticleItem({required this.article});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(Responsive.spacing(context, 16)),
+      decoration: BoxDecoration(
+        color: Theme.of(context).cardColor,
+        borderRadius: BorderRadius.circular(Responsive.size(context, 12)),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.05),
+            blurRadius: Responsive.size(context, 5),
+            offset: const Offset(0, 1),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            height: Responsive.size(context, 150),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(Responsive.size(context, 8)),
+              image: DecorationImage(
+                image: NetworkImage(article.image),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          SizedBox(height: Responsive.spacing(context, 12)),
+          Text(
+            article.title,
+            style: TextStyle(
+              fontSize: Responsive.fontSize(context, 16),
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(height: Responsive.spacing(context, 8)),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                article.author,
+                style: TextStyle(
+                  fontSize: Responsive.fontSize(context, 14),
+                  color: Theme.of(context).colorScheme.secondary,
+                ),
+              ),
+              Text(
+                '${article.readTime} • ${article.date}',
+                style: TextStyle(
+                  fontSize: Responsive.fontSize(context, 12),
+                  color: Theme.of(context).colorScheme.secondary,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _QATab extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final List<Map<String, String>> faqs = [
+      {
+        'question': 'What should I bring to my first appointment?',
+        'answer':
+            'Please bring your ID, insurance card, and any relevant medical records. Arrive 15 minutes early to complete paperwork.'
+      },
+      {
+        'question': 'Do you accept walk-ins?',
+        'answer':
+            'We recommend scheduling an appointment in advance, but walk-ins are welcome during regular hours.'
+      },
+      {
+        'question': 'How can I reschedule or cancel my appointment?',
+        'answer':
+            'You can reschedule or cancel your appointment through the app or by calling our clinic directly at least 24 hours in advance.'
+      },
+      {
+        'question': 'What payment methods do you accept?',
+        'answer':
+            'We accept cash, credit cards, debit cards, and most major insurance plans.'
+      },
+    ];
+    List<Widget> qaWidgets = faqs
+        .map<Widget>((faq) => _QAItem(
+              question: faq['question']!,
+              answer: faq['answer']!,
+            ))
+        .toList();
+    qaWidgets.insertBetween(SizedBox(
+        height: Responsive.spacing(context, 16)));
+    return SingleChildScrollView(
+      padding: EdgeInsets.all(Responsive.spacing(context, 16)),
+      child: Column(
+        children: qaWidgets,
       ),
     );
   }
@@ -1812,7 +1848,10 @@ class _QAItem extends StatelessWidget {
   final String question;
   final String answer;
 
-  const _QAItem({required this.question, required this.answer});
+  const _QAItem({
+    required this.question,
+    required this.answer,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -1866,7 +1905,11 @@ class _BookingBottomSheet extends StatefulWidget {
 class _BookingBottomSheetState extends State<_BookingBottomSheet> {
   int _selectedDateIndex = 0;
   int _selectedTimeIndex = 0;
-  final List<String> _dates = ['Today', 'Tomorrow', 'Day after tomorrow'];
+  final List<String> _dates = [
+    'Today',
+    'Tomorrow',
+    'Day after tomorrow',
+  ];
   final List<Map<String, String>> _times = [
     {'time': '10:00 AM', 'type': 'In-Clinic'},
     {'time': '11:00 AM', 'type': 'Video Consult'},
@@ -1916,18 +1959,21 @@ class _BookingBottomSheetState extends State<_BookingBottomSheet> {
                     CircleAvatar(
                       radius: Responsive.size(context, 25),
                       backgroundImage: NetworkImage(
-                        'https://images.unsplash.com/photo-1659353887233-05d1180eb691?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80',
-                      ),
+                          'https://images.unsplash.com/photo-1659353887233-05d1180eb691?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80'),
                     ),
                     Positioned(
                       bottom: 0,
                       right: 0,
                       child: Container(
-                        padding: EdgeInsets.all(Responsive.spacing(context, 2)),
+                        padding:
+                            EdgeInsets.all(Responsive.spacing(context, 2)),
                         decoration: BoxDecoration(
                           color: LightColors.success,
                           shape: BoxShape.circle,
-                          border: Border.all(color: Colors.white, width: 2),
+                          border: Border.all(
+                            color: Colors.white,
+                            width: 2,
+                          ),
                         ),
                         child: const Icon(
                           Icons.check,
@@ -1979,9 +2025,7 @@ class _BookingBottomSheetState extends State<_BookingBottomSheet> {
               itemCount: _dates.length,
               itemBuilder: (context, index) {
                 return Container(
-                  margin: EdgeInsets.only(
-                    right: Responsive.spacing(context, 8),
-                  ),
+                  margin: EdgeInsets.only(right: Responsive.spacing(context, 8)),
                   child: ChoiceChip(
                     label: Text(_dates[index]),
                     selected: _selectedDateIndex == index,
@@ -1999,9 +2043,8 @@ class _BookingBottomSheetState extends State<_BookingBottomSheet> {
                       fontSize: Responsive.fontSize(context, 14),
                     ),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                        Responsive.size(context, 20),
-                      ),
+                      borderRadius:
+                          BorderRadius.circular(Responsive.size(context, 20)),
                       side: BorderSide(
                         color: _selectedDateIndex == index
                             ? colorScheme.primary
@@ -2031,9 +2074,7 @@ class _BookingBottomSheetState extends State<_BookingBottomSheet> {
               itemBuilder: (context, index) {
                 return Container(
                   width: Responsive.size(context, 120),
-                  margin: EdgeInsets.only(
-                    right: Responsive.spacing(context, 8),
-                  ),
+                  margin: EdgeInsets.only(right: Responsive.spacing(context, 8)),
                   child: ChoiceChip(
                     label: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -2067,9 +2108,8 @@ class _BookingBottomSheetState extends State<_BookingBottomSheet> {
                       fontSize: Responsive.fontSize(context, 14),
                     ),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                        Responsive.size(context, 12),
-                      ),
+                      borderRadius:
+                          BorderRadius.circular(Responsive.size(context, 12)),
                       side: BorderSide(
                         color: _selectedTimeIndex == index
                             ? colorScheme.primary
@@ -2096,15 +2136,16 @@ class _BookingBottomSheetState extends State<_BookingBottomSheet> {
             decoration: BoxDecoration(
               color: Theme.of(context).cardColor,
               borderRadius: BorderRadius.circular(Responsive.size(context, 12)),
-              border: Border.all(color: Theme.of(context).dividerColor),
+              border: Border.all(
+                color: Theme.of(context).dividerColor,
+              ),
             ),
             child: const Row(
               children: [
                 CircleAvatar(
                   radius: 20,
                   backgroundImage: NetworkImage(
-                    'https://randomuser.me/api/portraits/men/41.jpg',
-                  ),
+                      'https://randomuser.me/api/portraits/men/41.jpg'),
                 ),
                 SizedBox(width: 12),
                 Column(
@@ -2120,7 +2161,10 @@ class _BookingBottomSheetState extends State<_BookingBottomSheet> {
                     SizedBox(height: 4),
                     Text(
                       '35 years, Male',
-                      style: TextStyle(fontSize: 14, color: Colors.grey),
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.grey,
+                      ),
                     ),
                   ],
                 ),
@@ -2141,8 +2185,7 @@ class _BookingBottomSheetState extends State<_BookingBottomSheet> {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text(
-                      'Appointment booked with ${widget.doctorData.name} for ${_dates[_selectedDateIndex]} at ${_times[_selectedTimeIndex]['time']}',
-                    ),
+                        'Appointment booked with ${widget.doctorData.name} for ${_dates[_selectedDateIndex]} at ${_times[_selectedTimeIndex]['time']}'),
                     backgroundColor: LightColors.success,
                     behavior: SnackBarBehavior.floating,
                   ),
@@ -2152,9 +2195,7 @@ class _BookingBottomSheetState extends State<_BookingBottomSheet> {
                 backgroundColor: colorScheme.primary,
                 foregroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(
-                    Responsive.size(context, 12),
-                  ),
+                  borderRadius: BorderRadius.circular(Responsive.size(context, 12)),
                 ),
               ),
               child: Text(

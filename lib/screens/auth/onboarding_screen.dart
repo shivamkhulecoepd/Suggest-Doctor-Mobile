@@ -114,120 +114,119 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       // backgroundColor: Colors.white,
-      body: SafeArea(
-        child: Column(
-          children: [
-            // Skip button
-            Align(
-              alignment: Alignment.topRight,
-              child: Padding(
-                padding: const EdgeInsets.all(10),
-                child: TextButton(
-                  onPressed: _onSkipPressed,
-                  style: TextButton.styleFrom(
-                    foregroundColor: Colors.grey.shade600,
-                  ),
-                  child: const Text(
-                    'Skip',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                    ),
+      body: Column(
+        children: [
+          const SizedBox(height: 32),
+          // Skip button
+          Align(
+            alignment: Alignment.topRight,
+            child: Padding(
+              padding: const EdgeInsets.all(10),
+              child: TextButton(
+                onPressed: _onSkipPressed,
+                style: TextButton.styleFrom(
+                  foregroundColor: Colors.grey.shade600,
+                ),
+                child: const Text(
+                  'Skip',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
               ),
             ),
-            
-            // Page view
-            Expanded(
-              flex: 3,
-              child: PageView.builder(
-                controller: _pageController,
-                itemCount: _onboardingPages.length,
-                onPageChanged: _onPageChanged,
-                itemBuilder: (context, index) {
-                  return _OnboardingPage(
-                    title: _onboardingPages[index]['title'],
-                    description: _onboardingPages[index]['description'],
-                    image: _onboardingPages[index]['image'],
-                    color: _onboardingPages[index]['color'],
-                  );
-                },
-              ),
+          ),
+          
+          // Page view
+          Expanded(
+            flex: 3,
+            child: PageView.builder(
+              controller: _pageController,
+              itemCount: _onboardingPages.length,
+              onPageChanged: _onPageChanged,
+              itemBuilder: (context, index) {
+                return _OnboardingPage(
+                  title: _onboardingPages[index]['title'],
+                  description: _onboardingPages[index]['description'],
+                  image: _onboardingPages[index]['image'],
+                  color: _onboardingPages[index]['color'],
+                );
+              },
             ),
-            
-            // Indicators and button
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
-              child: Column(
-                children: [
-                  // Page indicators
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: List.generate(
-                      _onboardingPages.length,
-                      (index) => GestureDetector(
-                        onTap: () => _onIndicatorTap(index),
-                        child: AnimatedContainer(
-                          duration: const Duration(milliseconds: 300),
-                          margin: const EdgeInsets.symmetric(horizontal: 4),
-                          width: _currentPage == index ? 24 : 8,
-                          height: 8,
-                          decoration: BoxDecoration(
-                            color: _currentPage == index 
-                                ? _onboardingPages[index]['color']
-                                : Colors.grey.shade300,
-                            borderRadius: BorderRadius.circular(4),
-                          ),
+          ),
+          
+          // Indicators and button
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+            child: Column(
+              children: [
+                // Page indicators
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: List.generate(
+                    _onboardingPages.length,
+                    (index) => GestureDetector(
+                      onTap: () => _onIndicatorTap(index),
+                      child: AnimatedContainer(
+                        duration: const Duration(milliseconds: 300),
+                        margin: const EdgeInsets.symmetric(horizontal: 4),
+                        width: _currentPage == index ? 24 : 8,
+                        height: 8,
+                        decoration: BoxDecoration(
+                          color: _currentPage == index 
+                              ? _onboardingPages[index]['color']
+                              : Colors.grey.shade300,
+                          borderRadius: BorderRadius.circular(4),
                         ),
                       ),
                     ),
                   ),
-                  
-                  const SizedBox(height: 32),
-                  
-                  // Next button
-                  SizedBox(
-                    width: double.infinity,
-                    height: 56,
-                    child: ElevatedButton(
-                      onPressed: _onNextPressed,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: _onboardingPages[_currentPage]['color'],
-                        foregroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                        elevation: 2,
+                ),
+                
+                const SizedBox(height: 32),
+                
+                // Next button
+                SizedBox(
+                  width: double.infinity,
+                  height: 56,
+                  child: ElevatedButton(
+                    onPressed: _onNextPressed,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: _onboardingPages[_currentPage]['color'],
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            _currentPage == _onboardingPages.length - 1 
-                                ? 'Get Started' 
-                                : 'Next',
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                            ),
+                      elevation: 2,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          _currentPage == _onboardingPages.length - 1 
+                              ? 'Get Started' 
+                              : 'Next',
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
                           ),
-                          if (_currentPage < _onboardingPages.length - 1)
-                            const SizedBox(width: 8),
-                          if (_currentPage < _onboardingPages.length - 1)
-                            const Icon(
-                              Icons.arrow_forward_rounded,
-                              size: 20,
-                            ),
-                        ],
-                      ),
+                        ),
+                        if (_currentPage < _onboardingPages.length - 1)
+                          const SizedBox(width: 8),
+                        if (_currentPage < _onboardingPages.length - 1)
+                          const Icon(
+                            Icons.arrow_forward_rounded,
+                            size: 20,
+                          ),
+                      ],
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

@@ -540,32 +540,32 @@ class HomeContentModern extends StatelessWidget {
                     _SpecialtyChipModern(
                       icon: Icons.favorite,
                       label: 'Cardiology',
-                      color: const Color(0xFFE3F2FD),
+                      color: const Color.fromARGB(255, 121, 199, 255),
                     ),
                     _SpecialtyChipModern(
                       icon: Icons.psychology,
                       label: 'Psychology',
-                      color: const Color(0xFFF3E5F5),
+                      color: const Color.fromARGB(255, 236, 112, 255),
                     ),
                     _SpecialtyChipModern(
                       icon: Icons.child_care,
                       label: 'Pediatrics',
-                      color: const Color(0xFFE8F5E9),
+                      color: const Color.fromARGB(255, 102, 255, 115),
                     ),
                     _SpecialtyChipModern(
                       icon: Icons.female,
                       label: 'Gynecology',
-                      color: const Color(0xFFFFF3E0),
+                      color: const Color.fromARGB(255, 255, 193, 93),
                     ),
                     _SpecialtyChipModern(
                       icon: Icons.accessibility_new,
                       label: 'Orthopedics',
-                      color: const Color(0xFFFBE9E7),
+                      color: const Color.fromARGB(255, 255, 110, 94),
                     ),
                     _SpecialtyChipModern(
                       icon: Icons.local_hospital,
                       label: 'Dermatology',
-                      color: const Color(0xFFE0F2F1),
+                      color: const Color.fromARGB(255, 92, 255, 247),
                     ),
                   ],
                 ),
@@ -745,17 +745,18 @@ class _SpecialtyChipModern extends StatelessWidget {
         vertical: Responsive.spacing(context, 8),
       ),
       decoration: BoxDecoration(
-        color: color,
+        color: color.withValues(alpha: 0.25),
         borderRadius: BorderRadius.circular(Responsive.size(context, 20)),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: Responsive.size(context, 16), color: Colors.black54),
+          Icon(icon, size: Responsive.size(context, 16), color: color),
           SizedBox(width: Responsive.spacing(context, 6)),
           Text(
             label,
             style: TextStyle(
+              color: color,
               fontSize: Responsive.fontSize(context, 12),
               fontWeight: FontWeight.w600,
             ),

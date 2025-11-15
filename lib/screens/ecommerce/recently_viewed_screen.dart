@@ -103,7 +103,6 @@ class _RecentlyViewedScreenState extends State<RecentlyViewedScreen> {
             fontWeight: FontWeight.w600,
           ),
         ),
-        automaticallyImplyLeading: false,
         actions: [
           if (_recentlyViewedItems.isNotEmpty)
             IconButton(

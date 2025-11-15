@@ -33,7 +33,6 @@ class OrderConfirmationScreen extends StatelessWidget {
             fontWeight: FontWeight.w600,
           ),
         ),
-        automaticallyImplyLeading: false,
       ),
       body: SingleChildScrollView(
         child: Column(

@@ -139,7 +139,6 @@ class _AppointmentsScreenNewState extends State<AppointmentsScreenNew>
             fontWeight: FontWeight.w600,
           ),
         ),
-        automaticallyImplyLeading: false,
         // variant: CustomAppBarVariant.withActions,
         actions: [
           IconButton(
